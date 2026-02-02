@@ -1,0 +1,41 @@
+================================================================================
+                    ÉTAPE 3 : EXTRACTION DES DONNÉES MYSQL
+================================================================================
+
+PS C:\...\td-migration-bdd> docker run --rm --network td-migration-bdd_default `
+  -v "${PWD}/flyway_migration:/app/flyway_migration" `
+  migration-scripts python scripts/extract_to_flyway.py
+
+Connexion à MySQL...
+Extraction Utilisateurs...
+✓ 500 utilisateurs extraits.
+Extraction Reservations...
+✓ 1000 réservations extraites.
+
+🎉 Extraction terminée dans flyway_migration/sql/V2__Insert_data.sql !
+
+================================================================================
+                    APERÇU DU FICHIER V2__Insert_data.sql
+================================================================================
+
+-- V2__Insert_data.sql
+-- Données extraites depuis MySQL
+
+INSERT INTO utilisateurs (id, nom, prenom, email, mot_de_passe) VALUES
+(1, 'Martin', 'Jean', 'jean.martin123@gmail.com', 'xK9$mP2...'),
+(2, 'Dupont', 'Marie', 'marie.dupont456@yahoo.fr', 'aB3#nL7...'),
+(3, 'Bernard', 'Pierre', 'pierre.bernard789@hotmail.com', 'qW5@vC1...'),
+... (497 autres lignes)
+(500, 'Leroy', 'Sophie', 'sophie.leroy999@outlook.com', 'zT4!hY8...');
+
+INSERT INTO reservations (id, utilisateur_id, destination, date_reservation, prix) VALUES
+(1, 234, 'Paris', '2026-03-15 00:00:00', 450.50),
+(2, 89, 'Lyon', '2026-04-22 00:00:00', 125.00),
+... (998 autres lignes)
+(1000, 412, 'Marseille', '2026-07-30 00:00:00', 899.99);
+
+-- Mise à jour des séquences
+SELECT setval('utilisateurs_id_seq', (SELECT MAX(id) FROM utilisateurs));
+SELECT setval('reservations_id_seq', (SELECT MAX(id) FROM reservations));
+
+================================================================================

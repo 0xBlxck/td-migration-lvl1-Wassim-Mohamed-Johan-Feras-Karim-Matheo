@@ -1,0 +1,33 @@
+================================================================================
+                    ÉTAPE 1 : LANCEMENT DES CONTENEURS DOCKER
+================================================================================
+
+PS C:\...\td-migration-bdd> docker compose up -d
+
+[+] Running 27/27
+ ✔ postgres Pulled                                               127.8s
+   ✔ c56f2098d81b Download complete                                3.5s
+   ✔ 119d43eec815 Download complete                               52.7s
+   ✔ 1df764af9d29 Download complete                                0.4s
+   ...
+ ✔ mysql Pulled                                                  137.7s
+   ✔ ce1944d72bca Download complete                               18.7s
+   ✔ 3145e04eb470 Download complete                              125.8s
+   ...
+
+[+] Running 5/5
+ ✔ Network td-migration-bdd_default         Created                0.3s
+ ✔ Volume "td-migration-bdd_mysql_data"     Created                0.0s
+ ✔ Volume "td-migration-bdd_postgres_data"  Created                0.0s
+ ✔ Container postgres-target                Started                1.6s
+ ✔ Container mysql-source                   Started                1.6s
+
+================================================================================
+
+PS C:\...\td-migration-bdd> docker ps
+
+NAMES             STATUS                   PORTS
+mysql-source      Up 2 minutes (healthy)   0.0.0.0:3306->3306/tcp
+postgres-target   Up 2 minutes (healthy)   0.0.0.0:5432->5432/tcp
+
+================================================================================

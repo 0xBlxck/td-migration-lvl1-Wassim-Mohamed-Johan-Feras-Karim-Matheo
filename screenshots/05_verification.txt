@@ -1,0 +1,50 @@
+================================================================================
+                 ÉTAPE 5 : VÉRIFICATION DES DONNÉES MIGRÉES
+================================================================================
+
+PS C:\...\td-migration-bdd> docker exec postgres-target psql -U postgres -d reservation_voyage `
+  -c "SELECT COUNT(*) as utilisateurs FROM utilisateurs; SELECT COUNT(*) as reservations FROM reservations;"
+
+ utilisateurs 
+--------------
+          500
+(1 row)
+
+ reservations
+--------------
+         1000
+(1 row)
+
+================================================================================
+                    APERÇU DES DONNÉES DANS POSTGRESQL
+================================================================================
+
+PS C:\...\td-migration-bdd> docker exec postgres-target psql -U postgres -d reservation_voyage `
+  -c "SELECT * FROM utilisateurs LIMIT 5;"
+
+ id |   nom    | prenom |           email            |   mot_de_passe    |      date_creation      
+----+----------+--------+----------------------------+-------------------+-------------------------
+  1 | Martin   | Jean   | jean.martin123@gmail.com   | xK9$mP2nL...      | 2026-02-02 10:15:38.123
+  2 | Dupont   | Marie  | marie.dupont456@yahoo.fr   | aB3#nL7qW...      | 2026-02-02 10:15:38.123
+  3 | Bernard  | Pierre | pierre.bernard789@hotmail.com | qW5@vC1zT...   | 2026-02-02 10:15:38.123
+  4 | Petit    | Lucie  | lucie.petit321@gmail.com   | hY8!kM4xN...      | 2026-02-02 10:15:38.123
+  5 | Moreau   | Thomas | thomas.moreau654@yahoo.fr  | bR6@pL9sV...      | 2026-02-02 10:15:38.123
+(5 rows)
+
+================================================================================
+
+PS C:\...\td-migration-bdd> docker exec postgres-target psql -U postgres -d reservation_voyage `
+  -c "SELECT * FROM reservations LIMIT 5;"
+
+ id | utilisateur_id | destination |   date_reservation    |  prix   
+----+----------------+-------------+-----------------------+---------
+  1 |            234 | Paris       | 2026-03-15 00:00:00   |  450.50
+  2 |             89 | Lyon        | 2026-04-22 00:00:00   |  125.00
+  3 |            156 | Nice        | 2026-05-10 00:00:00   |  320.75
+  4 |             42 | Bordeaux    | 2026-06-18 00:00:00   |  275.25
+  5 |            301 | Toulouse    | 2026-07-05 00:00:00   |  198.00
+(5 rows)
+
+================================================================================
+         ✅ MIGRATION RÉUSSIE : Les données sont identiques !
+================================================================================

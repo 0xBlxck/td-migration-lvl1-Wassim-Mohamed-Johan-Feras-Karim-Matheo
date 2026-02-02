@@ -1,0 +1,38 @@
+================================================================================
+                 ÉTAPE 2 : PEUPLEMENT DE LA BASE MYSQL (Faker)
+================================================================================
+
+PS C:\...\td-migration-bdd> docker run --rm --network td-migration-bdd_default migration-scripts
+
+En attente de MySQL...
+
+MySQL est prêt !
+Création de la base ReservationVoyage...
+Création de la table Utilisateurs...
+Création de la table Reservations...
+Génération de 500 utilisateurs...
+✓ 500 utilisateurs insérés.
+Génération de 1000 réservations...
+✓ 1000 réservations insérées.
+
+🎉 Base MySQL peuplée avec succès !
+
+================================================================================
+                         VÉRIFICATION DANS MYSQL
+================================================================================
+
+PS C:\...\td-migration-bdd> docker exec mysql-source mysql -uroot -proot -e "USE ReservationVoyage; SELECT COUNT(*) FROM Utilisateurs; SELECT COUNT(*) FROM Reservations;"
+
++----------+
+| COUNT(*) |
++----------+
+|      500 |
++----------+
+
++----------+
+| COUNT(*) |
++----------+
+|     1000 |
++----------+
+
+================================================================================

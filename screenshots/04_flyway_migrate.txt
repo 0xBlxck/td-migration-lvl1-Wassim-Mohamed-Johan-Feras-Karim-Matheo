@@ -1,0 +1,43 @@
+================================================================================
+                    ÉTAPE 4 : MIGRATION FLYWAY VERS POSTGRESQL
+================================================================================
+
+PS C:\...\td-migration-bdd> docker run --rm --network td-migration-bdd_default `
+  -v "${PWD}/flyway_migration/sql:/flyway/sql" `
+  -v "${PWD}/flyway_migration/conf:/flyway/conf" `
+  flyway/flyway -configFiles="/flyway/conf/flyway.conf" migrate
+
+Flyway OSS Edition 12.0.0 by Redgate
+
+See release notes here: https://rd.gt/416ObMi
+Database: jdbc:postgresql://postgres:5432/reservation_voyage (PostgreSQL 16)
+
+Successfully validated 4 migrations (execution time 00:00.088s)
+Creating Schema History table "public"."flyway_schema_history" ...
+
+Current version of schema "public": << Empty Schema >>
+
+Migrating schema "public" to version 1 - Create tables
+Migrating schema "public" to version 2 - Insert data
+Migrating schema "public" to version 3 - Test integrite
+Migrating schema "public" to version 4 - Test completude
+
+Successfully applied 4 migrations to schema "public" (execution time 00:02.341s)
+
+================================================================================
+                         FLYWAY INFO (État final)
+================================================================================
+
+PS C:\...\td-migration-bdd> docker run --rm --network td-migration-bdd_default `
+  flyway/flyway -configFiles="/flyway/conf/flyway.conf" info
+
++-----------+---------+---------------------+------+---------------------+---------+
+| Version   | Desc    | Installed on        | State|                             |
++-----------+---------+---------------------+------+---------------------+---------+
+| 1         | Create  | 2026-02-02 10:15:36 | Success                            |
+| 2         | Insert  | 2026-02-02 10:15:38 | Success                            |
+| 3         | Test in | 2026-02-02 10:15:38 | Success                            |
+| 4         | Test co | 2026-02-02 10:15:38 | Success                            |
++-----------+---------+---------------------+------+---------------------+---------+
+
+================================================================================

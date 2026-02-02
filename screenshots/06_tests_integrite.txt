@@ -1,0 +1,76 @@
+================================================================================
+              ÉTAPE 6 : TESTS D'INTÉGRITÉ ET DE COMPLÉTUDE (Niveau 3)
+================================================================================
+
+                         TEST 1 : Absence de valeurs NULL
+--------------------------------------------------------------------------------
+
+PS C:\...\td-migration-bdd> docker exec postgres-target psql -U postgres -d reservation_voyage `
+  -c "SELECT count(*) as erreurs_email_null FROM utilisateurs WHERE email IS NULL;"
+
+ erreurs_email_null 
+--------------------
+                  0
+(1 row)
+
+✅ PASS : Aucun email NULL trouvé
+
+================================================================================
+
+                         TEST 2 : Intégrité des clés étrangères
+--------------------------------------------------------------------------------
+
+PS C:\...\td-migration-bdd> docker exec postgres-target psql -U postgres -d reservation_voyage `
+  -c "SELECT count(*) as resa_orphelines FROM reservations r LEFT JOIN utilisateurs u ON r.utilisateur_id = u.id WHERE u.id IS NULL;"
+
+ resa_orphelines
+-----------------
+               0
+(1 row)
+
+✅ PASS : Aucune réservation orpheline (toutes liées à un utilisateur valide)
+
+================================================================================
+
+                         TEST 3 : Volumétrie - Utilisateurs
+--------------------------------------------------------------------------------
+
+PS C:\...\td-migration-bdd> docker exec postgres-target psql -U postgres -d reservation_voyage `
+  -c "SELECT count(*) as total_utilisateurs FROM utilisateurs;"
+
+ total_utilisateurs 
+--------------------
+                500
+(1 row)
+
+✅ PASS : 500 utilisateurs attendus, 500 trouvés
+
+================================================================================
+
+                         TEST 4 : Volumétrie - Réservations
+--------------------------------------------------------------------------------
+
+PS C:\...\td-migration-bdd> docker exec postgres-target psql -U postgres -d reservation_voyage `
+  -c "SELECT count(*) as total_reservations FROM reservations;"
+
+ total_reservations 
+--------------------
+               1000
+(1 row)
+
+✅ PASS : 1000 réservations attendues, 1000 trouvées
+
+================================================================================
+                         RÉSUMÉ DES TESTS
+================================================================================
+
+| Test                          | Attendu | Résultat | Statut |
+|-------------------------------|---------|----------|--------|
+| Emails NULL                   |       0 |        0 |   ✅   |
+| Réservations orphelines       |       0 |        0 |   ✅   |
+| Nombre d'utilisateurs         |     500 |      500 |   ✅   |
+| Nombre de réservations        |    1000 |     1000 |   ✅   |
+
+================================================================================
+              🎉 TOUS LES TESTS D'INTÉGRITÉ SONT PASSÉS AVEC SUCCÈS 🎉
+================================================================================
