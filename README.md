@@ -1,6 +1,6 @@
 # 🚀 TD Migration de Base de Données - MySQL vers PostgreSQL
 
-**Groupe :** [Wassim, Johan, Mohamed, Feras]  
+**Groupe :** Matheo, Karim  
 **Module :** Infrastructure & DevOps  
 **Date :** Février 2026
 
@@ -279,10 +279,8 @@ CREATE TABLE reservations (
 
 ## 👥 Équipe
 
-- **Wassim** - [Rôle]
-- **Johan** - [Rôle]
-- **Mohamed** - [Rôle]
-- **Feras** - [Rôle]
+- **Matheo**
+- **Karim**
 
 ---
 
