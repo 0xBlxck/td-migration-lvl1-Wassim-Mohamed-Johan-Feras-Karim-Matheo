@@ -1,0 +1,18 @@
+# Données Docker (volumes)
+mysql-data/
+pg-data/
+
+# Python
+__pycache__/
+*.pyc
+.venv/
+venv/
+
+# IDE
+.idea/
+.vscode/
+*.swp
+
+# OS
+.DS_Store
+Thumbs.db
