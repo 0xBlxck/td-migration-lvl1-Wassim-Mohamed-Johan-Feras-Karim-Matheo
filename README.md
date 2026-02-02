@@ -77,8 +77,8 @@ td-migration-bdd/
 ### Étape 1 : Cloner le dépôt
 
 ```bash
-git clone https://github.com/VOTRE_PSEUDO/td-migration-lvl1-wassim-johan-mohamed-feras.git
-cd td-migration-lvl1-wassim-johan-mohamed-feras
+git clone https://github.com/0xBlxck/td-migration-lvl1-Wassim-Mohamed-Johan-Feras-Karim-Matheo.git
+cd td-migration-lvl1-Wassim-Mohamed-Johan-Feras-Karim-Matheo
 ```
 
 ### Étape 2 : Lancer les bases de données
