@@ -280,6 +280,7 @@ CREATE TABLE reservations (
 ## 👥 Équipe
 
 - **Wassim**
+- **Mohamed**
 - **Johan**
 - **Feras**
 - **Karim**
